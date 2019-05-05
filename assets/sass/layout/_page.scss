@@ -2,7 +2,146 @@
 body{
     margin:0;
     padding: 0;
+    background-color: #151c44;//_palette(bg);
 }
+
+
+/*- Fish CSS Draw -*/
+.fish{
+  margin: 20% auto;
+  width: 350px;
+  height: 350px;
+  position: relative;
+
+  .belly{
+    width: 60%;
+    height: 50%;
+    background-color: white;
+    @include border-radius(50%);
+
+    .cheeck{
+      position: absolute;
+      border: 0 solid transparent;
+      border-top: 0.5em solid #151c4482;
+      border-radius: 100% 10% 0 0;
+      top: 5em;
+      left: 5em;
+      width: 10%;
+      height: 20%;
+      transform: rotate(-35deg);
+      
+    }
+
+    .eye{
+      width: 8%;
+      height: 8%;
+      padding: 2%;
+      @include border-radius(50%);
+      background-color: #151c44;//_palette(bg);
+      position: absolute;
+      top: 8%;
+      left: 8%;
+
+      .pupil {
+        width: 100%;
+        height: 100%;
+        @include border-radius(50%);
+        background-color: white;
+      }
+    }
+
+    .mouth{
+      position: absolute;
+      left:-3%;
+      top:30%;
+      
+      .lips{
+        border: solid white;
+        border-width: 0 0.8em 0.8em 0;
+        display: inline-block;
+        padding: 0.5em;
+        @include rotate(-70);
+        @include border-radius(4px);
+
+      }
+    }
+
+    .flipper{
+      position: relative;
+      border: 0 solid transparent;
+      border-top: 2.5em solid white;
+      border-radius: 100% 0% 0 0;
+      top: 6em;
+      left: 2em;
+      width: 10%;
+      height: 35%;
+      transform: rotate(0deg);
+      
+    }
+    &::after{
+      content:"";
+      position: absolute;
+      border: 0 solid transparent;
+      border-top: 2.5em solid white;
+      border-radius: 15% 0% 0 100%;
+      top: -0.5em;
+      left: 7.4em;
+      width: 15%;
+      height: 0%;
+      transform: rotate(55deg);
+    }
+    &::before{
+      content:"";
+      position: absolute;
+      border: 0 solid transparent;
+      border-top: 2.5em solid white;
+      border-radius: 0 15% 100% 0;
+      top: 9em;
+      left: 6.5em;
+      width: 15%;
+      height: 0%;
+      transform: rotate(135deg);
+    }
+  }
+
+  .tail {
+    position: absolute;
+    left: 58%;
+    top: -5%;
+    width: 55%;
+    height: 50%;
+    transform: rotate(20deg);
+
+    .tail-top{
+      position: relative;
+      border: 0 solid transparent;
+      border-top: 3em solid white;
+      border-radius: 10% 100% 0 100%;
+      top: 3%;
+      left: 1%;
+      width: 80%;
+      height: 65%;
+      transform: rotate(255deg);
+      
+    }
+    .tail-bottom{
+      position: relative;
+      border: 0 solid transparent;
+      border-top: 2.5em solid white;
+      border-radius: 100% 0% 0 0;
+      top: 0.5em;
+      left: 1em;
+      width: 40%;
+      height: 45%;
+      transform: rotate(295deg);
+      
+    }
+  }
+}
+
+
+
+
 
 img{
     @include transition(transform 0.2s);
@@ -10,9 +149,12 @@ img{
     //opacity: 0;
 }
 
+
+
 .img-appeared{
     transform: translate(0,0);
-}
+    @include border-radius(50%);
+} 
 
 .container {
     width: 100%;
