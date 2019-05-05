@@ -1,0 +1,122 @@
+// Set background size
+// @param {string} $args
+@mixin background-size($args...) {
+  -webkit-background-size: $args;
+  -moz-background-size: $args;
+  background-size: $args;
+}
+
+// Set box shadow
+// @param {string} $top
+// @param {string} $left
+// @param {string} $blur
+// @param {string} $color
+// @param {string} $inset
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+// Transition
+// @param {string} $transitions
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+// Rotate
+//
+@mixin rotate($deg){
+  -ms-transform: rotate($deg+deg); /* IE 9 */
+  -webkit-transform: rotate($deg+deg); /* Chrome, Safari, Opera */
+  transform: rotate($deg+deg);
+}
+
+// Scale
+//
+@mixin scale($val){
+  -ms-transform: scale($val); /* IE 9 */
+  -webkit-transform: scale($val); /* Chrome, Safari, Opera */
+  transform: scale($val);
+}
+
+// Box Sizing
+// @param {string} $box-model
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model;
+  -moz-box-sizing: $box-model;
+  box-sizing: $box-model;
+}
+
+// Clearfix
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// @param {string} $radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+@mixin animate($args) {
+  -webkit-animation: $args; /* Safari 4+ */
+  -moz-animation:    $args; /* Fx 5+ */
+  -o-animation:      $args; /* Opera 12+ */
+  animation:         $args; /* IE 10+, Fx 29+ */
+}
+
+@mixin bounces(){
+  @keyframes bounces{
+    0%{
+      opacity: 0;
+      transform: scale(0.3) translate3d(0,0,0);
+    }
+    50%{
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+    80%{
+      opacity: 1;
+      transform: scale(0.89);
+    }
+    100%{
+      opacity: 1;
+      transform: scale(1) translate3d(0,0,0);
+    }
+  }
+}
+
+@mixin bouncesRotate($deg){
+  @keyframes bouncesRotate#{$deg}{
+    0%{
+      @include rotate($deg);
+    }
+    25%{
+      @include rotate($deg + ($deg / 5));
+    }
+    50%{
+      @include rotate( $deg - ($deg / 5) );
+    }
+    100%{
+      @include rotate($deg);
+    }
+  }
+}

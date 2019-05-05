@@ -1,0 +1,73 @@
+/// Gets a duration value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _duration($keys...) {
+	@return map-get($duration, $keys...);
+}
+
+/// Gets a font value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _font($keys...) {
+	@return map-get($font, $keys...);
+}
+
+/// Gets a misc value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _misc($keys...) {
+	@return map-get($misc, $keys...);
+}
+
+/// Gets a palette value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _palette($keys...) {
+	@return map-get($palette, $keys...);
+}
+
+/// Gets a size value.
+// @param {string} $keys Key(s).
+// @return {string} Value.
+@function _size($keys...) {
+	@return map-get($size, $keys...);
+}
+
+/// Gets a size value.
+// @param {string} $pixels target size.
+// @param {string} $context base size.
+// @return {string} Value.
+// @function em($pixels, $context: _size(ft)) {
+//   @return #{ $pixels : $context }em;
+// }
+
+// margin or padding size by resolutions :: .md-pt-s (padding-top size to s value visible on md resolution)
+@mixin custom-spacing($prefix) {
+    @each $k, $v in ('0': 0, 'x': 10px, 's': 20px, 'm': 30px, 'l': 60px){
+       .#{$prefix}-m-#{$k}  { margin: $v !important; }
+        .#{$prefix}-mx-#{$k} { margin-right: $v !important; margin-left: $v !important; }
+        .#{$prefix}-my-#{$k} { margin-top: $v !important; margin-bottom: $v !important; }
+        .#{$prefix}-mt-#{$k} { margin-top: $v !important; }
+        .#{$prefix}-mr-#{$k} { margin-right: $v !important; }
+        .#{$prefix}-mb-#{$k} { margin-bottom: $v !important; }
+        .#{$prefix}-ml-#{$k} { margin-left: $v !important; }
+
+        .#{$prefix}-p-#{$k}  { padding: $v !important; }
+        .#{$prefix}-px-#{$k} { padding-right: $v !important; padding-left: $v !important; }
+        .#{$prefix}-py-#{$k} { padding-top: $v !important; padding-bottom: $v !important; }
+        .#{$prefix}-pt-#{$k} { padding-top: $v !important; }
+        .#{$prefix}-pr-#{$k} { padding-right: $v !important; }
+        .#{$prefix}-pb-#{$k} { padding-bottom: $v !important; }
+        .#{$prefix}-pl-#{$k} { padding-left: $v !important; }
+    }
+}
+
+// No media-query for default prefix.
+@include custom-spacing(xs);
+
+// Media-queries based rules.
+@each $bk, $bv in ('sm': '≥tablet', 'md': '≥desktop', 'lg': '≥widescreen'){
+    @include media($bv) {
+        @include custom-spacing($bk);
+    }
+}

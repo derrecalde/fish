@@ -1,0 +1,31 @@
+{
+  "name": "derrecalde",
+  "description": "ChiFouMi",
+  "version": "0.0.1",
+  "author": {
+    "name": "Dorian Errecalde",
+    "email": "derrecalde@gmail.com"
+  },
+  "engines": {
+    "node": "~4.1"
+  },
+  "devDependencies": {
+    "imagemin-pngquant": "^6.0.1",
+    "imagemin-webp": "^5.0.0",
+    "imagemin-cli": "^4.0.0",
+    "node-sass": "^4.11.0",
+    "onchange": "^5.2.0",
+    "parallelshell": "^3.0.2",
+    "uglify-es": "^3.3.9"
+  },
+  "scripts": {
+    "build:sass": "node-sass --output-style compressed -o ./ ./assets/sass/style.scss",
+    "build:js": "uglifyjs ./assets/js/*.js ./assets/js/**/*.js -o ./scripts.min.js --source-map \"filename='scripts.min.js.map'\" -c ",
+    "build:ALL": "npm run build:sass & npm run build:js",
+    "watch:sass": "onchange './assets/sass/**/*.scss' -- npm run build:sass",
+    "watch:js": "onchange './assets/js/**/*.js' -- npm run build:js",
+    "watch:ALL": "parallelshell 'npm run watch:sass & npm run watch:js'",
+    "clean": "sudo rm -rf ./node_modules/",
+    "build:IMG": "imagemin ./assets/images/* -o --out-dir=./img/webp --plugin=webp & imagemin ./assets/images/*.jpg -o --out-dir=./images --plugin=jpegtran & imagemin ./assets/images/*.png -o --out-dir=./img --plugin=pngquant"
+  }
+}

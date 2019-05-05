@@ -1,0 +1,33 @@
+// Font Face
+//$font-path: './assets/fonts/';
+
+//@import url('https://fonts.googleapis.com/css?family=Lato:400,700,300');
+
+// Font
+$font: (
+  family: ('Arial', sans-serif),
+  bold: 700,
+  light: 300,
+  regular: 400
+);
+
+// Palette
+$palette: (
+  black-opac: rgba(1, 1, 1, 0.5),
+  white:#ffffff,
+  black:#000000,
+  transparent: rgba(1, 1, 1, 0)
+);
+
+// Layout
+$size: (
+  large: 820px,
+  large-paysage:1024px,
+  medium: 425px,
+  small:12px,
+  txt: 14px,
+  txt2: 16px,
+  txt3: 24px,
+  txt4: 30px,
+  txt5: 40px,
+);
