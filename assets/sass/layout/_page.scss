@@ -1,17 +1,21 @@
-/* Page */
-body{
-    margin:0;
-    padding: 0;
-    background-color: #151c44;//_palette(bg);
-}
+/**
+* FISH CSS
+*
+* @description : CSS/HTML graphic design illustration
+* 
+* @author : Errecalde Dorian
+* @repository : https://github.com/derrecalde/fish
+**/
 
 
-/*- Fish CSS Draw -*/
+
+/*- Fish CSS illustration -*/
 .fish{
   margin: 20% auto;
   width: 350px;
   height: 350px;
   position: relative;
+  transform: rotate(5deg);
 
   .belly{
     width: 60%;
@@ -111,7 +115,7 @@ body{
       position: relative;
       border: 0 solid transparent;
       border-top: 3em solid white;
-      border-radius: 10% 100% 0 100%;
+      border-radius: 10% 100% 0 70%;
       top: 3%;
       left: 1%;
       width: 80%;
@@ -133,9 +137,16 @@ body{
     }
   }
 }
+/*- End Fish CSS illustration -*/
 
 
 
+/* Page */
+body{
+  margin:0;
+  padding: 0;
+  background-color: #151c44;//_palette(bg);
+}
 
 
 img{
@@ -143,7 +154,6 @@ img{
     transform: translate(0,10%);
     //opacity: 0;
 }
-
 
 
 .img-appeared{

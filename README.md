@@ -1,4 +1,4 @@
-ChiFouMi
+Fish CSS Art
 =====================================
 
 ## Dependencies
