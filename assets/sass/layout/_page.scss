@@ -17,12 +17,39 @@
   position: relative;
   transform: rotate(5deg);
 
+  .bubles{
+    position: absolute;
+    left: -10%;
+    top: -10%;
+    width: 20%;
+    height: 20%;
+
+    .buble{
+      width: 20%;
+      height: 20%;
+      position: relative;
+      border: 0.1em solid white;
+      background-color: #151c44;
+      @include border-radius(50%);
+    }
+
+    .buble-big{
+      width: 80%;
+      height: 80%;
+      position: relative;
+      right: 90%;
+      border: 0.1em solid white;
+      background-color: #151c44;
+      @include border-radius(50%);
+    }
+  }
+  
   .belly{
     width: 60%;
     height: 50%;
     background-color: white;
     @include border-radius(50%);
-    @include box-shadow(30px, 15px, 130px, rgba(0, 0, 0, 0.6));
+    @include box-shadow(30px, 15px, 130px, rgba(0, 0, 0, 0.7));
 
     .cheeck{
       position: absolute;
@@ -139,6 +166,84 @@
 }
 /*- End Fish CSS illustration -*/
 
+.reflect{
+  width: 20%;
+  height: 100%;
+  background-image: linear-gradient(to right,rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  position: absolute;
+}
+.reflect-small{
+  left:70%;
+  width: 6%;
+  height: 100%;
+  background-image: linear-gradient(to right,rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  position: absolute;
+}
+
+/*- Animations -*/
+
+  /*- Object animations -*/
+
+  .fish{
+
+    .bubles{
+      
+      .buble{
+        animation: circulate 5s ease-in infinite;
+      }
+      
+      .buble-big{
+        animation: circulate 10s ease-in-out infinite;
+      }
+    }
+  }
+
+  .reflect{
+    animation: right-to-left 20s ease-in-out infinite;
+  }
+  .reflect-small{
+    animation: right-to-left 20s ease-in-out infinite;
+  }
+  /*- Object animations -*/
+
+
+@keyframes circulate {
+  0% {
+    transform: translate(0, 0); 
+    
+  }
+  25% {
+     transform: translate(-20%, 10%);
+  }
+  50% {
+     transform: translate(0%, 20%);
+  }
+  75% {
+    transform: translate(20%, 10%);
+  }
+}
+
+
+@keyframes right-to-left {
+  0% {
+    transform: translate(0, 0); 
+  }
+  50% {
+     transform: translate(300%, 0%);
+  }
+  100% {
+    transform: translate(0, 0);
+ }
+}
+
+@keyframes switch-color {
+  0%   { background-color: #151c44; }
+  25%  { background-color: #0f1536; }
+  25%  { background-color: #152d44; }
+  50%  { background-color: #12183a; }
+  100% { background-color: #151c44; }
+}
+/*- End animations -*/
 
 
 /* Page */
@@ -146,13 +251,13 @@ body{
   margin:0;
   padding: 0;
   background-color: #151c44;//_palette(bg);
+  animation: switch-color 10s linear infinite;
 }
 
 
 img{
     @include transition(transform 0.2s);
     transform: translate(0,10%);
-    //opacity: 0;
 }
 
 

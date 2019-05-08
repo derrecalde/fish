@@ -1,4 +1,4 @@
-Fish CSS Art
+Fish CSS Illustration
 =====================================
 
 ## Dependencies
