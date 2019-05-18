@@ -10,6 +10,14 @@
 
 
 /*- Fish CSS illustration -*/
+
+:root {
+  --bg-color: #151c44;
+  --empty-color: rgba(0, 0, 0, 0);
+}
+
+$rand: random(10);
+
 .fish{
   margin: 20% auto;
   width: 350px;
@@ -23,14 +31,17 @@
     top: -10%;
     width: 20%;
     height: 20%;
+    @include rotate(35);
 
     .buble{
-      width: 20%;
-      height: 20%;
+      width: 30%;
+      height: 30%;
+      top: 150%;
       position: relative;
       border: 0.1em solid white;
-      background-color: #151c44;
+      background-color: var(--empty-color);
       @include border-radius(50%);
+      @include scale(0);
     }
 
     .buble-big{
@@ -39,8 +50,15 @@
       position: relative;
       right: 90%;
       border: 0.1em solid white;
-      background-color: #151c44;
+      background-color: var(--empty-color);
       @include border-radius(50%);
+      top: -40%;
+      @include scale(0);
+    }
+
+    .buble-small{
+      width: 15%;
+      height: 15%;
     }
   }
   
@@ -67,12 +85,23 @@
     .eye{
       width: 9%;
       height: 9%;
-      border: 0.5em solid #151c44;
+      padding: 0.5em;
       @include border-radius(50%);
-      background-color: white;//_palette(bg);
+      background-color: var(--bg-color);
       position: absolute;
       top: 8%;
       left: 8%;
+
+      .pupill{
+        content: '';
+        width: 70%;
+        height: 70%;
+        left: 15%;
+        top: 15%;
+        background-color: white;
+        position: absolute;
+        @include border-radius(50%);
+      }
      
     }
 
@@ -133,10 +162,11 @@
   .tail {
     position: absolute;
     left: 58%;
-    top: -5%;
+    top: -12%;
     width: 55%;
     height: 50%;
     transform: rotate(20deg);
+    transform-origin: left;
 
     .tail-top{
       position: relative;
@@ -166,6 +196,31 @@
 }
 /*- End Fish CSS illustration -*/
 
+
+/*- Worm -*/
+
+.worm{
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.2s;
+
+  .worm-body{
+    width: 20%;
+    height: 100%;
+    background-color: brown;
+    @include border-radius(50%);
+    transition: all 0.2s;
+    position: relative;
+  }
+}
+
+/*- End Worm -*/
+
+
+
 .reflect{
   width: 20%;
   height: 100%;
@@ -179,30 +234,58 @@
   background-image: linear-gradient(to right,rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
   position: absolute;
 }
+.sail{
+  top:0;
+  width: 100%;
+  height: 70%;
+  background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  position: absolute;
+}
 
 /*- Animations -*/
 
   /*- Object animations -*/
 
   .fish{
+    animation: sway 2s ease-in-out infinite;
+    animation-direction: alternate;
+
+    .belly{
+
+      .flipper{
+        animation: swim .8s ease-in-out infinite;
+        animation-direction: alternate;
+      }
+
+    }
+    .tail {
+      animation: swim-slow 3s ease-in-out infinite;
+      animation-direction: alternate;
+
+    }
 
     .bubles{
       
       .buble{
-        animation: circulate 5s ease-in infinite;
+        animation: to-top 4s cubic-bezier(0.67, 0.02, 1, 1) infinite;
+        animation-delay: 0.1s;
+      }
+      .buble-small{
+        animation-delay: 2s;
       }
       
-      .buble-big{
-        animation: circulate 10s ease-in-out infinite;
+      .buble-big{        
+        animation: to-top 9s cubic-bezier(0.67, 0.02, 1, 1) infinite;
+        animation-delay: 1.5s;
       }
     }
   }
 
   .reflect{
-    animation: right-to-left 20s ease-in-out infinite;
+    animation: right-to-left 40s ease-in-out infinite;
   }
   .reflect-small{
-    animation: right-to-left 20s ease-in-out infinite;
+    animation: right-to-left 30s ease-in-out infinite;
   }
   /*- Object animations -*/
 
@@ -220,6 +303,25 @@
   }
   75% {
     transform: translate(20%, 10%);
+  }
+}
+
+
+@keyframes to-top {
+  0% {
+    transform: translate(200%, 180%) scale(0.2); 
+  }
+  5% {
+    transform: translate(0%, 180%);
+  }  
+  7% {
+    transform: translate(5%, 182%);
+  }  
+  8% {
+    transform: translate(0%, 183%); 
+  } 
+  100% {
+    transform: translate(0%, -2000%);
   }
 }
 
@@ -243,6 +345,98 @@
   50%  { background-color: #12183a; }
   100% { background-color: #151c44; }
 }
+
+@keyframes slide-in-bottom {
+  0% {
+    top: 120%;
+  }
+  10% {
+    top: 120%;
+  }
+  15% {
+     top: 50%;
+  }
+  75% {
+     top: 50%;
+  }
+  80% {
+    top: 120%;
+  }
+  100% {
+    top: 120%;
+  }
+}
+
+@keyframes swim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes swim-slow {
+  0% {
+    transform: rotate(18deg);
+  }
+  100% {
+    transform: rotate(22deg);
+  }
+}
+
+
+@keyframes sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes eyes {
+  0% {
+    transform: translate(0, 0); 
+  }
+  65% {
+    transform: translate(0, 0); 
+  }
+  80% {
+    transform: translate(0, 10%); 
+  }
+  90% {
+    transform: translate(0, 10%); 
+  }
+  95% {
+    transform: translate(20%, 0); 
+  }
+  100% {
+    transform: translate(20%, 0);
+ }
+}
+
+@keyframes eye {
+  0% {
+    transform: translate(0, 0); 
+  }
+  50% {
+    transform: translate(0, 0); 
+  }
+  70% {
+    transform: translate(0, 10%); 
+  }
+  80% {
+    transform: translate(0, 10%); 
+  }
+  90% {
+    transform: translate(20%, 0); 
+  }
+  100% {
+    transform: translate(20%, 0);
+ }
+}
+
 /*- End animations -*/
 
 
@@ -251,7 +445,7 @@ body{
   margin:0;
   padding: 0;
   background-color: #151c44;//_palette(bg);
-  animation: switch-color 10s linear infinite;
+  animation: switch-color 60s linear infinite;
 }
 
 

@@ -10,6 +10,9 @@
 </head>
 <body>
 
+    <div class="sail"></div>
+
+    <div class="reflect-small" style="left:20%;width:15%;" ></div>
     <div class="reflect"></div>
     <div class="reflect-small"></div>
 
@@ -20,6 +23,7 @@
 
         <div class="bubles">
           <div class="buble"></div>
+          <div class="buble buble-small"></div>
           <div class="buble-big"></div>
         </div>
 
@@ -27,7 +31,9 @@
 
           <div class="cheeck"></div>
 
-          <div class="eye"></div>
+          <div class="eye">
+              <div class="pupill"></div>
+          </div>
 
           <div class="mouth">
             <div class="lips"></div>
@@ -45,7 +51,38 @@
       </div>
       <!-- End FISH -->
 
+      <div class="worm">
+        <div class="worm-body"></div>
+        <div class="worm-body"></div>
+        <div class="worm-body"></div>
+        <div class="worm-body"></div>
+        <div class="worm-body"></div>
+      </div>
+
 
     </div>
+
+    <script >
+      let eyeFish = document.querySelector('.pupill');
+      let wrom = document.querySelector('.worm');
+
+      window.onmousemove = function (e) {
+          var x = e.clientX;
+              y = e.clientY;
+              eyeFish.style.top  = (y/30) + '%';
+              eyeFish.style.left = (x/30) + '%';
+
+              wrom.style.transform = "translate("+x+"px, "+y+"px)";
+              
+              let wromBody = wrom.children;
+
+              for (i = 0; i < wromBody.length; i++) {
+                wromBody[i].style.backgroundColor = "green";
+                wromBody[i].style.top = i*(y/30) + '%';
+                // element.style.transform = "translate("+$i*(x/30)+"px, "+$i*(y/30)+"px)";
+              }
+      };
+    </script>
+
 </body>
 </html>
