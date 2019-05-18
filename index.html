@@ -63,25 +63,111 @@
     </div>
 
     <script >
-      let eyeFish = document.querySelector('.pupill');
-      let wrom = document.querySelector('.worm');
 
+
+      // --------------------------------------------
+      // Animate with animation request
+      function animate({duration, draw, timing}) {
+
+        let start = performance.now();
+
+        requestAnimationFrame(function animate(time) {
+          let timeFraction = (time - start) / duration;
+          if (timeFraction > 1) timeFraction = 1;
+
+          let progress = timing(timeFraction)
+
+          draw(progress);
+
+          if (timeFraction < 1) {
+            requestAnimationFrame(animate);
+          }
+
+        });
+        }
+      // --------------------------------------------
+
+      let cheek    = document.querySelector('.worm');
+
+      cheek.onclick = function() {
+        console.log('kiko');
+      animate({
+        duration: 1000,
+        timing: function(timeFraction) {
+          return timeFraction;
+        },
+        draw: function(progress) {
+          cheek.style.width = progress * 100 + '%';
+        }
+      });
+    };
+
+
+      // --------------------------------------------
+      // Draw
+      function draw(elmt, progress) {
+        elmt.style.left = progress + 'px';
+      }
+      // --------------------------------------------
+
+      function circ(timeFraction) {
+        return 1 - Math.sin(Math.acos(timeFraction));
+      }
+
+
+      // --------------------------------------------
+      // Get objects
+      let eyeFish = document.querySelector('.pupill');
+      let wrom    = document.querySelector('.worm');
+      // --------------------------------------------
+
+
+      // --------------------------------------------
+      // On mouse move event
       window.onmousemove = function (e) {
+          
+          // --------------------------------------------
+          // Init vars
           var x = e.clientX;
               y = e.clientY;
               eyeFish.style.top  = (y/30) + '%';
               eyeFish.style.left = (x/30) + '%';
+          // --------------------------------------------
 
-              wrom.style.transform = "translate("+x+"px, "+y+"px)";
-              
-              let wromBody = wrom.children;
 
+          // --------------------------------------------
+          // Set objects
+          wrom.style.transform = "translate("+x+"px, "+y+"px)";                            
+          let wromBody = wrom.children;
+          // --------------------------------------------
+
+
+          // --------------------------------------------
+          // Animate childrens folowing effect
               for (i = 0; i < wromBody.length; i++) {
-                wromBody[i].style.backgroundColor = "green";
+                
                 wromBody[i].style.top = i*(y/30) + '%';
-                // element.style.transform = "translate("+$i*(x/30)+"px, "+$i*(y/30)+"px)";
+                // console.log(20*i-wrom.style.left);
+
+                // --------------------------------------------
+                // Launch animate function
+                /*animate({
+                  duration: 1000,
+                  timing: function(timeFraction) {
+                    return timeFraction;
+                  },
+                  draw: function(progress) {
+                    wromBody[i].style.width = progress * 100 + '%';
+                  }
+                });*/
+                // --------------------------------------------        
+
+                //wromBody[i].style.transform = "translate("+(x/30)+"%, "+(y/30)+"%)";
               }
+          // --------------------------------------------
+
       };
+      // --------------------------------------------
     </script>
 
 </body>
