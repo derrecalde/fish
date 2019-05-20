@@ -12,9 +12,11 @@
 
     <div class="sail"></div>
 
+    <!-- Reflects -->
     <div class="reflect-small" style="left:20%;width:15%;" ></div>
     <div class="reflect"></div>
     <div class="reflect-small"></div>
+    <!-- End reflects -->
 
     <div class="container" >
 
@@ -49,18 +51,35 @@
         </div>
 
       </div>
-      <!-- End FISH -->
+    <!-- End FISH -->
 
-      <div class="worm">
-        <div class="worm-body"></div>
-        <div class="worm-body"></div>
-        <div class="worm-body"></div>
-        <div class="worm-body"></div>
-        <div class="worm-body"></div>
+
+    
+    <!-- Wrom -->
+    <div class="worm-hook">
+
+      <div class="hook">
+        <div class="arrow"></div>
+        <div class="clasp"></div>
       </div>
-
+      
+      <div class="worm-head">
+        <div class="worm-eyes eye-left"></div>
+        <div class="worm-eyes eye-right"></div>
+      </div>            
 
     </div>
+    
+    <div class="worm">
+      <div class="worm-body"></div>
+      <div class="worm-body"></div>
+      <div class="worm-body"></div>
+    </div>
+
+    <!-- End WORM -->
+
+
+  </div>
 
     <script >
 
@@ -87,38 +106,24 @@
         }
       // --------------------------------------------
 
-      let cheek    = document.querySelector('.worm');
-
-      cheek.onclick = function() {
-        console.log('kiko');
-      animate({
-        duration: 1000,
-        timing: function(timeFraction) {
-          return timeFraction;
-        },
-        draw: function(progress) {
-          cheek.style.width = progress * 100 + '%';
-        }
-      });
-    };
-
-
-      // --------------------------------------------
-      // Draw
-      function draw(elmt, progress) {
-        elmt.style.left = progress + 'px';
-      }
-      // --------------------------------------------
-
-      function circ(timeFraction) {
-        return 1 - Math.sin(Math.acos(timeFraction));
-      }
-
 
       // --------------------------------------------
       // Get objects
-      let eyeFish = document.querySelector('.pupill');
-      let wrom    = document.querySelector('.worm');
+      let eyeFish  = document.querySelector('.pupill');
+      let wrom     = document.querySelector('.worm');
+      let wromHead = document.querySelector('.worm-head');
+      let hook     = document.querySelector('.worm-hook');
+      let wromBody = wrom.children;
+      // --------------------------------------------
+
+
+      // --------------------------------------------
+      // Set delay transitions
+      for (i = 0; i < wromBody.length; i++) {
+        wromBody[i].style.transitionTimingFunction = 'cubic-bezier(0, 0.7, 0.45, 1.'+1+')';
+        let unit = (0.57*i)/100;
+        wromBody[i].style.transitionDelay = unit+'s';        
+      }
       // --------------------------------------------
 
 
@@ -132,42 +137,66 @@
               y = e.clientY;
               eyeFish.style.top  = (y/30) + '%';
               eyeFish.style.left = (x/30) + '%';
+              
+              
           // --------------------------------------------
 
 
           // --------------------------------------------
-          // Set objects
-          wrom.style.transform = "translate("+x+"px, "+y+"px)";                            
-          let wromBody = wrom.children;
+          // Point cursor
+          let centerX = (hook.style.left) + (hook.style.width / 2);
+          let centerY = (hook.style.top) + (hook.style.height / 2);
+          let radians  = Math.atan2(x - centerX, y - centerY);
+          let deg = (radians / 2 * (180 / Math.PI) * -1);
+          let oppositeDeg = ( deg < 0 ) ? 360 + -deg : deg;
+          // --------------------------------------------
+
+
+          // --------------------------------------------
+          // Hook animation
+          animate({
+                  duration: 1000,
+                  timing: function(timeFraction) {
+                    return timeFraction;
+                  },
+                  draw: function(progress) {
+                    hook.style.transform       = "translate("+x+"px, "+y+"px) rotate("+deg+"deg)";  
+                    wromHead.style.transform   = "rotate("+oppositeDeg+"deg)";  
+                    hook.style.transitionDelay = 0.01+'s';
+                  }
+                });                          
+          
           // --------------------------------------------
 
 
           // --------------------------------------------
           // Animate childrens folowing effect
               for (i = 0; i < wromBody.length; i++) {
-                
-                wromBody[i].style.top = i*(y/30) + '%';
-                // console.log(20*i-wrom.style.left);
+
+                // Init worm body elments
+                let element = wromBody[i];              
 
                 // --------------------------------------------
-                // Launch animate function
-                /*animate({
+                // Start animation
+                animate({
                   duration: 1000,
                   timing: function(timeFraction) {
                     return timeFraction;
                   },
                   draw: function(progress) {
-                    wromBody[i].style.width = progress * 100 + '%';
+                    let xCorrector = (i/3.1);
+                    let yCorrector = (i/3);
+                    element.style.transform = 'translate('+x*xCorrector+'px, '+y*yCorrector+'px)';
                   }
-                });*/
+                });
                 // --------------------------------------------        
-
-                //wromBody[i].style.transform = "translate("+(x/30)+"%, "+(y/30)+"%)";
+                              
               }
           // --------------------------------------------
 
       };
       // --------------------------------------------
+
     </script>
 
 </body>
